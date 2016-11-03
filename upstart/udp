@@ -1,0 +1,12 @@
+#!/bin/sh /etc/rc.common
+
+START=50
+
+start() {
+    echo start
+    /usr/sbin/server.py &
+}
+
+stop() {
+    echo "udplistener cannot be stopped"
+}
