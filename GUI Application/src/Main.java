@@ -7,5 +7,4 @@ public class Main {
 		w.pack();
 		w.setVisible(true);
 	}
-
 }
