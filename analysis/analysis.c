@@ -22,7 +22,7 @@ int main(int argc, char **args){
 
     //we want to know how many seconds we need to store
     //we have hundredths of seconds as resolution
-    int numSeconds = atoi(args[2])*100;
+    int numSeconds = atoi(args[2])*10;
     unsigned int counts[numSeconds];
     for(int i=0; i<numSeconds; i++)
         counts[i] = 0;
@@ -54,9 +54,9 @@ int main(int argc, char **args){
             micros += 1000000;
             seconds--;
         }
-        //to get to hundredths, we need to divide by 10^4
-        int hundredths = micros/10000;
-        counts[seconds*100+hundredths]++;
+        //to get to tenths, we need to divide by 10^5
+        int tenths = micros/100000;
+        counts[seconds*10+tenths]++;
     }
 
 

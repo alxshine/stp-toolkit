@@ -1,0 +1,36 @@
+\documentclass{beamer}
+\usepackage{uibkstyle}
+\usepackage{pgfplots}
+\usepackage{filecontents}
+
+\pgfplotsset{compat=1.10}
+
+\begin{document}
+\pgfplotstableread{bcStormArp.dat}{\bcStormArp}
+\pgfplotstableread{./stpArp.dat}{\stpArp}
+\pgfplotstableread{./stpSTP.dat}{\stpSTP}
+
+\begin{frame}
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[xlabel=Zeit]
+                \addplot[black, thick] table [x={s}, y={arp}] {\bcStormArp};
+
+            \end{axis}
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[xlabel=Zeit]
+                \addplot[orange, thick] table [x={s}, y={arp}] {\stpArp};
+                \addplot[blue, thick] table [x={s}, y={stp}] {\stpSTP};
+            \end{axis}
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+\end{document}
