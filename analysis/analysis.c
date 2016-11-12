@@ -21,7 +21,8 @@ int main(int argc, char **args){
     }
 
     //we want to know how many seconds we need to store
-    int numSeconds = atoi(args[2]);
+    //we have hundredths of seconds as resolution
+    int numSeconds = atoi(args[2])*100;
     unsigned int counts[numSeconds];
     for(int i=0; i<numSeconds; i++)
         counts[i] = 0;
@@ -29,6 +30,7 @@ int main(int argc, char **args){
     //we want it to be possible to submit a filter string
     if(argc>3){
         char *filterString = args[3];
+        printf("s\t%s\n", args[3]);
         struct bpf_program fp;
         if(pcap_compile(pcap, &fp, filterString, 0, PCAP_NETMASK_UNKNOWN)<0){
             fprintf(stderr, "could not compile filter\n");
@@ -41,12 +43,23 @@ int main(int argc, char **args){
     }
 
     long firststamp = header->ts.tv_sec;
+    long firstmicros = header->ts.tv_usec;
 
     while(pcap_next_ex(pcap, &header, &data) >= 0){
-       int seconds = header->ts.tv_sec - firststamp;
-       counts[seconds]++;
+        int seconds = header->ts.tv_sec - firststamp;
+        long micros = header->ts.tv_usec - firstmicros;
+        //if micros is <0, we need to decrease the seconds by one
+        //and add 1 million, to make them positive
+        if(micros<0){
+            micros += 1000000;
+            seconds--;
+        }
+        //to get to hundredths, we need to divide by 10^4
+        int hundredths = micros/10000;
+        counts[seconds*100+hundredths]++;
     }
 
+
     for(int i=0; i<numSeconds; i++)
-        printf("%d\n", counts[i]);
+        printf("%d\t%d\n", i+1, counts[i]);
 }
