@@ -6,70 +6,43 @@
 \pgfplotsset{compat=1.10}
 
 \begin{document}
-\pgfplotstableread{../data/bcStormArp.dat}{\bcStorm}
-\pgfplotstableread{../data/bcStormArp2.dat}{\bcStormB}
-\pgfplotstableread{../data/bcStormArp3.dat}{\bcStormC}
-\pgfplotstableread{../data/bcStormArp4.dat}{\bcStormD}
-\pgfplotstableread{../data/stpArp.dat}{\stpArp}
-\pgfplotstableread{../data/stpSTP.dat}{\stpSTP}
+\pgfplotstableread{bcCum.dat}{\bcCum}
+\pgfplotstableread{bc4.dat}{\bc}
+\pgfplotstableread{stp.dat}{\stp}
 
 \begin{frame}
     \begin{figure}
         \centering
         \begin{tikzpicture}
-            \begin{axis}[xlabel=Zeit]
-                \addplot[black, thick] table [x={s}, y={arp}] {\bcStorm};
+            \begin{axis}[
+                    xlabel={Zeit $\left[s\right]$},
+                    ylabel={Pakete $\left[\frac{1}{s}\right]$},
+                    legend entries={Pakete pro Sekunde BC-Storm},
+                    legend style ={font=\tiny}]
+                \addplot[pantone289, thick] table [x={s}, y={arp}] {\bc};
 
             \end{axis}
         \end{tikzpicture}
-        \caption{1. Broadcast Storm}
+        \caption{Broadcast Storm}
     \end{figure}
 \end{frame}
-\begin{frame}
-    \begin{figure}
-        \centering
-        \begin{tikzpicture}
-            \begin{axis}[xlabel=Zeit]
-                \addplot[black, thick] table [x={s}, y={arp}] {\bcStormB};
 
-            \end{axis}
-        \end{tikzpicture}
-        \caption{2. Broadcast Storm}
-    \end{figure}
-\end{frame}
 \begin{frame}
     \begin{figure}
         \centering
         \begin{tikzpicture}
-            \begin{axis}[xlabel=Zeit]
-                \addplot[black, thick] table [x={s}, y={arp}] {\bcStormC};
+            \begin{semilogyaxis}[
+                    xlabel={Zeit $\left[s\right]$},
+                    ylabel={Pakete},
+                    legend style={font=\tiny},
+                    legend pos=south east,
+                    legend entries={Gesamtpakete BC-Storm, Gesamtpakete mit STP}]
+                \addplot[pantone289, thick] table [x={s}, y={arp}] {\bcCum};
+                \addplot[pantone144, thick] table [x={s}, y={p}] {\stp};
 
-            \end{axis}
+            \end{semilogyaxis}
         \end{tikzpicture}
-        \caption{3. Broadcast Storm}
-    \end{figure}
-\end{frame}
-\begin{frame}
-    \begin{figure}
-        \centering
-        \begin{tikzpicture}
-            \begin{axis}[xlabel=Zeit]
-                \addplot[black, thick] table [x={s}, y={arp}] {\bcStormD};
-
-            \end{axis}
-        \end{tikzpicture}
-        \caption{4. Broadcast Storm}
-    \end{figure}
-\end{frame}
-\begin{frame}
-    \begin{figure}
-        \centering
-        \begin{tikzpicture}
-            \begin{axis}[xlabel=Zeit]
-                \addplot[orange, thick] table [x={s}, y={arp}] {\stpArp};
-                \addplot[blue, thick] table [x={s}, y={stp}] {\stpSTP};
-            \end{axis}
-        \end{tikzpicture}
+        \caption{Broadcast Storm}
     \end{figure}
 \end{frame}
 \end{document}
