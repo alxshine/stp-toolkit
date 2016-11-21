@@ -19,7 +19,7 @@
                     ylabel={Pakete $\left[\frac{1}{s}\right]$},
                     legend entries={Pakete pro Sekunde BC-Storm},
                     legend style ={font=\tiny}]
-                \addplot[pantone289, thick] table [x={s}, y={arp}] {\bc};
+                \addplot[pantone289!70, thick] table [x={s}, y={arp}] {\bc};
 
             \end{axis}
         \end{tikzpicture}
@@ -33,14 +33,31 @@
         \begin{tikzpicture}
             \begin{semilogyaxis}[
                     xlabel={Zeit $\left[s\right]$},
-                    ylabel={Pakete},
+                    ylabel={Gesamtzahl Pakete},
                     legend style={font=\tiny},
                     legend pos=south east,
-                    legend entries={Gesamtpakete BC-Storm, Gesamtpakete mit STP}]
-                \addplot[pantone289, thick] table [x={s}, y={arp}] {\bcCum};
-                \addplot[pantone144, thick] table [x={s}, y={p}] {\stp};
-
+                    legend entries={BC-Storm, STP}]
+                \addplot[pantone289!70, thick] table [x={s}, y={arp}] {\bcCum};
+                \only<2>{\addplot[pantone144, thick] table [x={s}, y={p}] {\stp};}
             \end{semilogyaxis}
+        \end{tikzpicture}
+        \caption{Broadcast Storm}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                    xlabel={Zeit $\left[s\right]$},
+                    ylabel={Gesamtzahl Pakete},
+                    legend style={font=\tiny},
+                    legend pos=north west,
+                    legend entries={BC-Storm, STP}]
+                \addplot[pantone289!70, thick] table [x={s}, y={arp}] {\bcCum};
+                \only<2>{\addplot[pantone144, thick] table [x={s}, y={p}] {\stp};}
+            \end{axis}
         \end{tikzpicture}
         \caption{Broadcast Storm}
     \end{figure}
