@@ -14,6 +14,7 @@ sockTrue = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sockTrue.bind(('', TRUE_PORT))
 
 call(["cp", "/etc/config/noStp", "/etc/config/network"])
+call(["/etc/init.d/network", "restart"])
 
 while True:
     if stp:

@@ -5,7 +5,11 @@ import sys
 
 MESSAGE = "AOEU"
 
-port = int(sys.argv[1])
+target = sys.argv[1]
+if target=="on":
+    port = 1337
+else:
+    port = 1338
 
 sock = socket(AF_INET, SOCK_DGRAM)
 sock.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
