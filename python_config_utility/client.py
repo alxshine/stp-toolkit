@@ -5,6 +5,11 @@ import sys
 
 MESSAGE = "AOEU"
 
+if len(sys.argv) < 2:
+    print("This command requires an argument (on/off)")
+    print("Use like so: " + sys.argv[0] + " on")
+    sys.exit()
+
 target = sys.argv[1]
 if target=="on":
     port = 1337
