@@ -15,3 +15,8 @@ The script should now have a more verbose message when the parameter is missing.
 After the client.py script was run, please wait for the network interfaces of the router to come up again.
 It takes a few seconds after the lights have come up again for the socket on the server to be recreated.
 Running the client script again before the server is done recreating the socket may cause undefined behaviour.
+
+Uploading to the server
+=======
+The sever needs the server.py to run at startup.
+For the OpenWrt I used the script that runs after initialization is done.
